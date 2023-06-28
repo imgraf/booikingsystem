@@ -1,28 +1,28 @@
-# Buchverwaltungssystem
-Das Buchverwaltungssystem ist eine Java-Anwendung, die entwickelt wurde, um Benutzern die Verwaltung ihrer Buchsammlung zu ermöglichen. Mit diesem Programm können Benutzer Bücher hinzufügen, löschen, anzeigen und nach Büchern suchen. Es basiert auf einer MongoDB-Datenbank, die als Backend für die Speicherung und Abfrage von Buchdaten verwendet wird.
+# Book Management System
+The Book Management System is a Java application designed to allow users to manage their book collection. With this program, users can add, delete, view, and search for books. It is based on a MongoDB database used as the backend for storing and querying book data.
 
-## Funktionalitäten
-1. Book hinzufügen: Der Benutzer kann die Informationen zu einem Book eingeben, einschließlich Titel, Autor, Verlag, Erscheinungsjahr und ISBN. Das Programm erfasst diese Daten und erstellt ein neues Buchobjekt, welches dann in der MongoDB-Datenbank gespeichert wird.
-2. Book löschen: Wenn ein Benutzer ein Book aus seiner Sammlung entfernen möchte, kann er den Titel des Buches angeben. Das Programm sucht nach dem Book in der Datenbank und löscht es dauerhaft.
-3. Alle Bücher anzeigen: Durch Auswahl dieser Option werden alle gespeicherten Bücher aufgelistet und detaillierte Informationen zu jedem Book angezeigt, einschließlich Titel, Autor, Verlag, Erscheinungsjahr und ISBN.
-4. Book suchen: Der Benutzer kann nach Büchern anhand eines Suchbegriffs im Titel suchen. Das Programm durchsucht die Datenbank nach Übereinstimmungen und zeigt die entsprechenden Bücher an.
+## Functionality
+1. Add Book: Users can enter the information about a book, including title, author, publisher, publication year, and ISBN. The program captures this data and creates a new book object, which is then stored in the MongoDB database.
+2. Delete Book: If a user wants to remove a book from their collection, they can specify the title of the book. The program searches for the book in the database and permanently deletes it.
+3. View All Books: By selecting this option, all stored books are listed, and detailed information about each book is displayed, including title, author, publisher, publication year, and ISBN.
+4. Search for Book: Users can search for books based on a search term in the title. The program searches the database for matches and displays the corresponding books.
 
-## Voraussetzungen
-Damit das Programm ordnungsgemäß ausgeführt werden kann, müssen einige Voraussetzungen erfüllt sein:
+## Requirements
+To run the program properly, some prerequisites must be met:
 
-1. MongoDB: Stelle sicher, dass MongoDB auf deinem System installiert und ausgeführt wird. Du kannst die offizielle MongoDB-Website besuchen und die Anweisungen befolgen, um MongoDB herunterzuladen und zu installieren.
-2. Java Development Kit (JDK): Du benötigst eine installierte JDK-Version, um das Programm auszuführen. Überprüfe, ob Java auf deinem System installiert ist, indem du den Befehl `java -version` im Terminal ausführst. Wenn Java nicht installiert ist, lade die neueste JDK-Version von der offiziellen Oracle-Website herunter und installiere sie.
-3. Entwicklungsumgebung (optional): Du kannst eine Java-Entwicklungsumgebung wie Eclipse, IntelliJ IDEA oder NetBeans verwenden, um den Quellcode zu bearbeiten und das Programm auszuführen. Wenn du keine Entwicklungsumgebung verwendest, kannst du den Quellcode mit einem Texteditor bearbeiten und ihn über die Befehlszeile kompilieren und ausführen.
+1. MongoDB: Make sure MongoDB is installed and running on your system. You can visit the official MongoDB website and follow the instructions to download and install MongoDB.
+2. Java Development Kit (JDK): You need to have a JDK version installed to run the program. Check if Java is installed on your system by running the `java -version` command in the terminal. If Java is not installed, download the latest JDK version from the official Oracle website and install it.
+3. Integrated Development Environment (optional): You can use a Java Integrated Development Environment like Eclipse, IntelliJ IDEA, or NetBeans to edit the source code and run the program. If you're not using an IDE, you can edit the source code with a text editor and compile and run it using the command line.
 
-## Programmausführung
-Folge diesen Schritten, um das Programm auszuführen:
+## Program Execution
+Follow these steps to run the program:
 
-1. Starte MongoDB: Öffne ein Terminalfenster und starte den MongoDB-Dienst mit dem Befehl mongod. Stelle sicher, dass MongoDB auf dem Standardport (27017) läuft.
-2. Öffne ein Terminalfenster oder eine Befehlszeile und navigiere zum Verzeichnis, in dem sich der Programmquellcode befindet.
-3. Kompiliere den Quellcode mit dem Befehl `javac *.java`.
-4. Führe das Programm mit dem Befehl java Benutzerschnittstelle aus.
+1. Start MongoDB: Open a terminal window and start the MongoDB service using the `mongod` command. Make sure MongoDB is running on the default port (27017).
+2. Open a terminal window or command prompt and navigate to the directory where the program source code is located.
+3. Compile the source code using the `javac *.java` command.
+4. Execute the program using the `java UserInterface` command.
 
-Nachdem das Programm gestartet ist, kannst du die verfügbaren Funktionen nutzen, indem du den Anweisungen auf der Benutzeroberfläche folgst.
+Once the program is launched, you can utilize the available functionalities by following the instructions on the user interface.
 
-## Autor
+## Author
 Graf, Raul
