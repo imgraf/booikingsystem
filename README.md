@@ -25,4 +25,4 @@ Follow these steps to run the program:
 Once the program is launched, you can utilize the available functionalities by following the instructions on the user interface.
 
 ## Author
-Graf, Raul
+Graf, Raul (RG)
