@@ -4,39 +4,39 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Benutzerschnittstelle {
-    private static BuchDAO buchDAO;
+    private static BookDAO bookDAO;
     private static Scanner scanner;
 
     public static void main(String[] args){
-        // Setze den Log-Level auf WARN
+        // Set log-level to WARN
         Logger.getLogger("org.mongodb.driver").setLevel(Level.WARNING);
 
-        buchDAO = new BuchDAO();
+        bookDAO = new BookDAO();
         scanner = new Scanner(System.in);
 
-        boolean weiter = true;
+        boolean state = true;
 
-        while(weiter) {
-            System.out.println("\n===== Buchverwaltung =====");
-            System.out.println("1. Buch hinzufügen");
-            System.out.println("2. Buch suchen");
-            System.out.println("3. Alle Bücher anzeigen");
-            System.out.println("4. Buch entfernen");
-            System.out.println("5. Beenden");
+        while(state) {
+            System.out.println("\n===== Book management =====");
+            System.out.println("1. Add book");
+            System.out.println("2. Search for book");
+            System.out.println("3. Show all books");
+            System.out.println("4. Delete book");
+            System.out.println("5. Cancel");
             System.out.println("==========================");
-            System.out.print("Ihre Option: ");
+            System.out.print("Your Option: ");
 
             int option = scanner.nextInt();
             scanner.nextLine();
 
             switch (option) {
-                case 1 -> buchHinzufuegen();
-                case 2 -> buchSuchen();
-                case 3 -> alleBuecherAnzeigen();
-                case 4 -> buchEntfernen();
-                case 5 -> weiter = false;
+                case 1 -> addBook();
+                case 2 -> searchBook();
+                case 3 -> viewAllBooks();
+                case 4 -> deleteBook();
+                case 5 -> state = false;
                 default -> {
-                    System.out.println("Ungültige Option. Bitte wählen Sie erneut.");
+                    System.out.println("Wrong option. Please make a choice again.");
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
                 }
@@ -45,131 +45,130 @@ public class Benutzerschnittstelle {
         scanner.close();
     }
 
-    public static void buchHinzufuegen(){
+    public static void addBook(){
 
         /**
-         Fügt ein neues Buch hinzu, indem der Benutzer nach den erforderlichen Informationen gefragt wird.
-         Die Funktion fordert den Benutzer auf, den Titel, Autor, Verlag, Erscheinungsjahr und die ISBN des Buches einzugeben.
-         Es wird überprüft, ob alle erforderlichen Informationen eingegeben wurden. Wenn Informationen fehlen,
-         wird der Benutzer erneut aufgefordert, die fehlenden Daten einzugeben.
-         Das Buch wird dann mit den eingegebenen Informationen erstellt und in der Datenbank gespeichert.
-         Am Ende wird eine Erfolgsmeldung angezeigt.
+         Add a new book by prompting the user for the required information.
+         The function prompts the user to enter the title, author, publisher, publication year, and ISBN of the book.
+         It checks if all the required information has been entered. If any information is missing,
+         the user is prompted again to enter the missing data.
+         The book is then created with the entered information and stored in the database.
+         A success message is displayed at the end.
         */
 
         System.out.println("===== Buch hinzufügen =====");
-        String titel = "";
-        String autor = "";
-        String verlag = "";
-        String erscheinungsjahr = "";
+        String title = "";
+        String author = "";
+        String publisher = "";
+        String year_of_pulication = "";
         String isbn = "";
 
 
-        while (titel.isEmpty() || autor.isEmpty() || verlag.isEmpty() || erscheinungsjahr.isEmpty() || isbn.isEmpty()) {
-            System.out.print("Titel: ");
-            titel = scanner.nextLine();
+        while (title.isEmpty() || author.isEmpty() || publisher.isEmpty() || year_of_pulication.isEmpty() || isbn.isEmpty()) {
+            System.out.print("Title: ");
+            title = scanner.nextLine();
 
-            System.out.print("Autor: ");
-            autor = scanner.nextLine();
+            System.out.print("Author: ");
+            author = scanner.nextLine();
 
-            System.out.print("Verlag: ");
-            verlag = scanner.nextLine();
+            System.out.print("Publisher: ");
+            publisher = scanner.nextLine();
 
-            System.out.print("Erscheinungsjahr: ");
-            erscheinungsjahr = scanner.nextLine();
+            System.out.print("Year of publication: ");
+            year_of_pulication = scanner.nextLine();
 
             System.out.print("ISBN: ");
             isbn = scanner.nextLine();
 
-            if (titel.isEmpty() || autor.isEmpty() || verlag.isEmpty() || erscheinungsjahr.isEmpty() || isbn.isEmpty()) {
+            if (title.isEmpty() || author.isEmpty() || publisher.isEmpty() || year_of_pulication.isEmpty() || isbn.isEmpty()) {
                 System.out.println("Fehlende Informationen. Buch konnte nicht hinzugefügt werden.");
             }
         }
 
-        Buch buch = new Buch(titel, autor, verlag, erscheinungsjahr, isbn);
-        buchDAO.buchSpeichern(buch);
-        System.out.println("Buch wurde erfolgreich hinzugefügt.");
+        Book book = new Book(title, author, publisher, year_of_pulication, isbn);
+        bookDAO.save_book(book);
+        System.out.println("Book added successfully.");
     }
 
-    public static void buchSuchen(){
+    public static void searchBook(){
 
         /**
-         Sucht nach Büchern basierend auf einem angegebenen Suchbegriff. Der Benutzer wird aufgefordert,
-         einen Suchbegriff einzugeben. Anschließend werden die Bücher in der Datenbank nach dem Suchbegriff durchsucht
-         und die entsprechenden Suchergebnisse angezeigt. Für jedes gefundene Buch werden der Titel, Autor, Verlag,
-         Erscheinungsjahr und die ISBN ausgegeben.
+         Searches for books based on a specified search term. The user is prompted to enter a search term.
+         Subsequently, the books in the database are searched for the search term, and the corresponding search results
+         are displayed. For each found book, the title, author, publisher, publication year, and ISBN are output.
          */
 
-        System.out.println("===== Buch suchen =====");
-        System.out.print("Geben Sie den Suchbegriff ein: ");
+        System.out.println("===== Search for book =====");
+        System.out.print("Please enter search term: ");
         String suchbegriff = scanner.nextLine();
 
         if (suchbegriff.isEmpty()) {
-            System.out.println("Kein Suchbegriff eingegeben. Die Suche wird abgebrochen.");
+            System.out.println("No search term entered. Search was canceled.");
             return; // Die Methode wird hier beendet, da kein Suchbegriff vorhanden ist.
         }
 
-        System.out.println("Suchergebnisse:");
+        System.out.println("Results:");
 
-        for (Buch buch: buchDAO.buchSuchen(suchbegriff)) {
+        for (Book book: bookDAO.search_book(suchbegriff)) {
             System.out.println("--------------------------");
-            System.out.println("Titel: " + buch.getTitel());
-            System.out.println("Autor: " + buch.getAutor());
-            System.out.println("Verlag: " + buch.getVerlag());
-            System.out.println("Erscheinungsjahr: " + buch.getErscheinungsjahr());
-            System.out.println("ISBN: " + buch.getIsbn());
+            System.out.println("Title: " + book.getTitle());
+            System.out.println("Author: " + book.getAuthor());
+            System.out.println("Publisher: " + book.getPublisher());
+            System.out.println("Year of publication: " + book.getYear_of_publication());
+            System.out.println("ISBN: " + book.getIsbn());
             System.out.println("--------------------------");
         }
     }
 
-    public static void alleBuecherAnzeigen() {
+    public static void viewAllBooks() {
 
         /**
-         Zeigt alle Bücher in der Datenbank an. Ruft alle Bücher aus der Datenbank ab und gibt sie nacheinander aus.
-         Für jedes Buch werden der Titel, Autor, Verlag, Erscheinungsjahr und die ISBN angezeigt.
+         Display all books in the database. Retrieve all books from the database and display them one by one.
+         For each book, the title, author, publisher, publication year, and ISBN are shown.
          */
 
-        System.out.println("\n===== Alle Bücher anzeigen =====");
-        List<Buch> buecher = buchDAO.alleBuecherAbrufen();
+        System.out.println("\n===== View all books =====");
+        List<Book> books = bookDAO.view_all_books();
 
-        for (Buch buch:buecher) {
+        for (Book book:books) {
             System.out.println("--------------------------");
-            System.out.println("Titel: " + buch.getTitel());
-            System.out.println("Autor: " + buch.getAutor());
-            System.out.println("Verlag: " + buch.getVerlag());
-            System.out.println("Erscheinungsjahr: " + buch.getErscheinungsjahr());
-            System.out.println("ISBN: " + buch.getIsbn());
+            System.out.println("Title: " + book.getTitle());
+            System.out.println("Author: " + book.getAuthor());
+            System.out.println("Publisher: " + book.getPublisher());
+            System.out.println("Year of publication: " + book.getYear_of_publication());
+            System.out.println("ISBN: " + book.getIsbn());
             System.out.println("--------------------------");
         }
     }
 
-    public static void buchEntfernen() {
+    public static void deleteBook() {
 
         /**
-         Entfernt ein Buch aus der Datenbank.
-         Der Benutzer wird aufgefordert, den Titel des zu entfernenden Buches einzugeben.
-         Anhand des Titels wird das Buch in der Datenbank gesucht und entfernt.
-         Wenn das Buch gefunden und erfolgreich entfernt wurde, wird eine Bestätigung ausgegeben.
-         Andernfalls wird eine Fehlermeldung angezeigt, dass das Buch nicht gefunden wurde.
+         Remove a book from the database.
+         The user is prompted to enter the title of the book to be removed.
+         Based on the title, the book is searched for in the database and removed.
+         If the book is found and successfully removed, a confirmation message is displayed.
+         Otherwise, an error message is shown indicating that the book was not found.
          */
 
-        System.out.println("===== Buch entfernen =====");
-        System.out.print("Geben Sie den Titel des Buches ein: ");
-        String titel = scanner.nextLine();
+        System.out.println("===== Delete book =====");
+        System.out.print("Enter the title of the book: ");
+        String title = scanner.nextLine();
 
-        if (titel.isEmpty()) {
-            System.out.println(" - Kein Titel eingegeben. Die Suche wird abgebrochen.");
+        if (title.isEmpty()) {
+            System.out.println("No title entered. The search was canceled.");
             return; // Die Methode wird hier beendet, da kein Suchbegriff vorhanden ist.
         }
 
 
-        List<Buch> suchergebnisse = buchDAO.buchSuchen(titel);
+        List<Book> search_results = bookDAO.search_book(title);
 
-        if(!suchergebnisse.isEmpty()) {
-            Buch buch = suchergebnisse.get(0);
-            buchDAO.buchLoeschen(buch.getTitel());
-            System.out.println("Buch erfolgreich entfernt: " + buch.getTitel());
+        if(!search_results.isEmpty()) {
+            Book book = search_results.get(0);
+            bookDAO.delete_book(book.getTitle());
+            System.out.println("Book deleted successfully: " + book.getTitle());
         }else{
-            System.out.println("Buch nicht gefunden.");
+            System.out.println("Book not found.");
         }
     }
 }

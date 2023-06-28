@@ -2,10 +2,10 @@
 Das Buchverwaltungssystem ist eine Java-Anwendung, die entwickelt wurde, um Benutzern die Verwaltung ihrer Buchsammlung zu ermöglichen. Mit diesem Programm können Benutzer Bücher hinzufügen, löschen, anzeigen und nach Büchern suchen. Es basiert auf einer MongoDB-Datenbank, die als Backend für die Speicherung und Abfrage von Buchdaten verwendet wird.
 
 ## Funktionalitäten
-1. Buch hinzufügen: Der Benutzer kann die Informationen zu einem Buch eingeben, einschließlich Titel, Autor, Verlag, Erscheinungsjahr und ISBN. Das Programm erfasst diese Daten und erstellt ein neues Buchobjekt, welches dann in der MongoDB-Datenbank gespeichert wird.
-2. Buch löschen: Wenn ein Benutzer ein Buch aus seiner Sammlung entfernen möchte, kann er den Titel des Buches angeben. Das Programm sucht nach dem Buch in der Datenbank und löscht es dauerhaft.
-3. Alle Bücher anzeigen: Durch Auswahl dieser Option werden alle gespeicherten Bücher aufgelistet und detaillierte Informationen zu jedem Buch angezeigt, einschließlich Titel, Autor, Verlag, Erscheinungsjahr und ISBN.
-4. Buch suchen: Der Benutzer kann nach Büchern anhand eines Suchbegriffs im Titel suchen. Das Programm durchsucht die Datenbank nach Übereinstimmungen und zeigt die entsprechenden Bücher an.
+1. Book hinzufügen: Der Benutzer kann die Informationen zu einem Book eingeben, einschließlich Titel, Autor, Verlag, Erscheinungsjahr und ISBN. Das Programm erfasst diese Daten und erstellt ein neues Buchobjekt, welches dann in der MongoDB-Datenbank gespeichert wird.
+2. Book löschen: Wenn ein Benutzer ein Book aus seiner Sammlung entfernen möchte, kann er den Titel des Buches angeben. Das Programm sucht nach dem Book in der Datenbank und löscht es dauerhaft.
+3. Alle Bücher anzeigen: Durch Auswahl dieser Option werden alle gespeicherten Bücher aufgelistet und detaillierte Informationen zu jedem Book angezeigt, einschließlich Titel, Autor, Verlag, Erscheinungsjahr und ISBN.
+4. Book suchen: Der Benutzer kann nach Büchern anhand eines Suchbegriffs im Titel suchen. Das Programm durchsucht die Datenbank nach Übereinstimmungen und zeigt die entsprechenden Bücher an.
 
 ## Voraussetzungen
 Damit das Programm ordnungsgemäß ausgeführt werden kann, müssen einige Voraussetzungen erfüllt sein:
